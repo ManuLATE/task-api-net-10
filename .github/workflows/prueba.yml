@@ -12,6 +12,6 @@ jobs:
         run: echo "Hola desde Github Actions"
 
       - name: Debug
-        run:  |
+        run: |
           echo "Debugging: GITHUB_REF: ${{github.ref}}"
           echo "Debugging: RUNNER_OS: ${{runner.os}}"
