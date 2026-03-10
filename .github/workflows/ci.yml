@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+env:
+  DOTNET_VERSION: '10.0.x'
+  BUILD_CONFIGURATION: 'Release'
+
 jobs:
   build:
     runs-on: ubunto-latest
@@ -16,14 +20,15 @@ jobs:
       - name: Checkout del código
         uses: actions/checkout@v4
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: ${{env.DOTNET_VERSION}}
       
       - name: Verificar versión .NET
         run: dotnet --version
 
       - name: Build del proyecto
         id: build-step
-        run: dotnet build src/Api/Api.csproj --configuration Release
+        # working-directory: 'src/Api'
+        run: dotnet build src/Api/Api.csproj --configuration ${{env.BUILD_CONFIGURATION}}
         continue-on-error: true
 
       - name: Notifica on Build Failure
